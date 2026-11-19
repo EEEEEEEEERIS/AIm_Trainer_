@@ -41,11 +41,11 @@ namespace TestProject1
        public void GespeicherterEintrag_WirdWiederKorrektGeladen()
         {
             // Arrange
-            var speicher = new RankingRepository(testDatei);
+            var speicher = new RankingRepository();
             speicher.RepositoryAddEntry(NeuerEintrag("gustav", 42));
 
             // Act – zweites Objekt liest die Datei neu ein
-            var neuGeladen = new RankingRepository(testDatei);
+            var neuGeladen = new RankingRepository();
             neuGeladen.LoadOrCreateWholeList();
 
             // Assert
