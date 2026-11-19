@@ -20,7 +20,7 @@ namespace Aim_Trainer.RankingList
             return distance;
         }
 
-        private static int CalculatePointsforPositiveTargets(AimTarget target, MouseEventArgs e)
+        public static int CalculatePointsforPositiveTargets(AimTarget target, MouseEventArgs e)
         {
             double distance = CalculateTarget(target, e);
 
