@@ -135,7 +135,11 @@ namespace Aim_Trainer
                 if (points == 0) continue;
 
                 Round.Points += points;
-                Round.Hits++;
+
+                if(points>0)
+                {
+                    Round.Hits++;
+                }
 
                 PointsAnimation.Add(points, e.X, e.Y);
 
