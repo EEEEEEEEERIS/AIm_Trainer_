@@ -6,8 +6,37 @@ namespace Aim_Trainer.RankingList
 {
     public class RankingRepository
     {
+        private readonly RankingDatabase database = new RankingDatabase();
+        public void Add(RankingEntry entry)
+        {
+            database.Add(entry);
+            WholeList.Add(entry);
+        }
+
+        public List<RankingEntry> GetAll()
+        {
+            return database.GetAll();
+        }
+
+        public List<RankingEntry> GetByDifficulty(GameSettings.Difficulty difficulty)
+        {
+            return database.GetByDifficulty(difficulty);
+        }
+
+        public void ShowRankingAccordingToDifficulty(GameSettings.Difficulty difficultyLevel)
+        {
+            var list = GetByDifficulty(difficultyLevel);
+
+            if (list.Count == 0)
+            {
+                MessageBox.Show($"Noch keine Einträge für {difficultyLevel}.");
+                return;
+            }
+            ShowList(list, "Rangliste von " + difficultyLevel, medals: true);
+        }
+
+
         private readonly GameSettings _settings = new();
-        private readonly string _listPath;
         public List<RankingEntry> WholeList { get; private set; } = [];
         public string LastEnteredName
         {
@@ -21,78 +50,16 @@ namespace Aim_Trainer.RankingList
 
         public RankingRepository()
         {
-            _listPath = CreateListPath();
+            LoadOrCreateWholeList();
         }
 
-        private static string CreateListPath()
-        {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            string folder = Path.Combine(path, "Spiel");
-            Directory.CreateDirectory(folder);
-            return Path.Combine(folder, "Wholeliste.txt");
-        }
-
-        private void WriteWholeList()
-        {
-            try
-            {
-                //einfügen von | für trennung
-                var lines = WholeList.Select(entry =>
-                    $"{entry.Username}|" +
-                    $"{entry.Score}|" +
-                    $"{entry.HitScoreInPercent}%|" +
-                    $"{entry.Extra}|" +
-                    $"{entry.CreationDate.ToString("dd.MM.yyyy HH:mm", CultureInfo.InvariantCulture)}|" +
-                    $"{entry.Difficulty}");
-                //schreibt
-                File.WriteAllLines(_listPath, lines);
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine("Liste konnte nicht gespeichert werden: " + ex.Message);
-            }
-        }
 
         //liest daten wieder ein damit die Rangliste wieder angezeigt werden kann nach schließen
         public void LoadOrCreateWholeList()
         {
-            if (!File.Exists(_listPath))
-            {
-                WholeList = [];
-                return;
-            }
-
-            try
-            {
-                //liest ein, splited bei den | wieder
-                WholeList = [.. File.ReadAllLines(_listPath)
-                    .Where(line => !string.IsNullOrWhiteSpace(line))
-                    .Select(line => line.Split('|'))
-                    .Where(parts => parts.Length >= 6)
-                    .Select(parts => new RankingEntry
-                    {
-                        Username = parts[0].Trim(),
-                        Score = int.Parse(parts[1].Trim()),
-                        HitScoreInPercent = short.Parse(parts[2].Trim().TrimEnd('%')),
-                        Extra = parts[3].Trim(),
-                        CreationDate = DateTime.ParseExact(
-                             parts[4].Trim(),
-                            "dd.MM.yyyy HH:mm",
-                            CultureInfo.InvariantCulture),
-                         Difficulty = Enum.Parse<GameSettings.Difficulty>(parts[5].Trim())
-                    })];
-            }
-            catch (Exception)
-            {
-                WholeList = [];
-            }
+            WholeList = database.GetAll();
         }
 
-        public void RepositoryAddEntry(RankingEntry eintrag)
-        {
-            WholeList.Add(eintrag);
-            WriteWholeList();
-        }
         public List<RankingEntry> BestUsers() =>
              [.. WholeList.GroupBy(e => e.Username, StringComparer.OrdinalIgnoreCase)
                      .Select(gruppe => gruppe.OrderByDescending(e => e.Score).First())
@@ -129,7 +96,7 @@ namespace Aim_Trainer.RankingList
 
             RepositoryAddEntry(userInputInformation.User, userInputInformation.CreationDate, Round);
             ShowList(BestUsers(), "Rangliste", true);
-        }
+        } 
 
         public void ShowList(List<RankingEntry> list, string titel, bool medals = false)
         {
@@ -139,7 +106,7 @@ namespace Aim_Trainer.RankingList
 
         private void RepositoryAddEntry(string userName, DateTime creationDate, Round Round)
         {
-            RepositoryAddEntry(new RankingEntry
+            Add(new RankingEntry
             {
                 Username = userName,
                 Score = Round.Points,
@@ -149,19 +116,6 @@ namespace Aim_Trainer.RankingList
                 Difficulty = _settings.CurrentDifficulty
             });
         }
-
-        public void ShowRankingAccordingToDifficulty(GameSettings.Difficulty difficultyLevel)
-        {
-            var list = BestUserforDifficulties(difficultyLevel);
-
-            if (list.Count == 0)
-            {
-                MessageBox.Show($"Noch keine Einträge für {difficultyLevel}.");
-                return;
-            }
-            ShowList(BestUserforDifficulties(difficultyLevel), "Rangliste von " + difficultyLevel, true);
-        }
-
         public string lastEnteredName = "";
         public UsernameWithCreationTimeStampFromUserInput GetInformationFromUserInput()
         {
