@@ -193,6 +193,16 @@ namespace Aim_Trainer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap moorhunh {
+            get {
+                object obj = ResourceManager.GetObject("moorhunh", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap no_nope {
             get {
                 object obj = ResourceManager.GetObject("no-nope", resourceCulture);

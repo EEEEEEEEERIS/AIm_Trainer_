@@ -1,6 +1,7 @@
 ﻿using Aim_Trainer.GameData;
 using Aim_Trainer.RankingList;
 using Aim_Trainer.Targets;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
 namespace Aim_Trainer
 {
@@ -14,6 +15,7 @@ namespace Aim_Trainer
         private readonly RankingRepository _repository;
         public System.Windows.Forms.Timer AnimationTimer { get; private set; }
         public Round Round { get; private set; }
+        public int points;
 
         public GameState(GameSettings settings, StartScreen startScreen, PlayingField playingField, RankingRepository repository)
         {
@@ -131,7 +133,7 @@ namespace Aim_Trainer
 
             foreach (AimTarget target in targetFactory.targets)
             {
-                int points = ScoreCalculator.CheckingForPoints(e, target);
+                 points = ScoreCalculator.CheckingForPoints(e, target);
                 if (points == 0) continue;
 
                 Round.Points += points;

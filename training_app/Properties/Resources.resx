@@ -124,6 +124,9 @@
   <data name="zielscheibe_ohne_aussenrand" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\zielscheibe_ohne_aussenrand.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="4283880_2827" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\4283880_2827.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Spiel-3biild1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Spiel-3biild1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -142,8 +145,8 @@
   <data name="310508606_bb93419f-4970-4c11-87cc-a9d3c1edd0b0" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\310508606_bb93419f-4970-4c11-87cc-a9d3c1edd0b0.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="4283880_2823" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\4283880_2823.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="4283880_282" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\4283880_282.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Spiel-3biild2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Spiel-3biild2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -169,8 +172,8 @@
   <data name="spiel-bild21" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\spiel-bild21.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="4283880_282" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\4283880_282.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="4283880_2823" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\4283880_2823.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="4283880_2825" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\4283880_2825.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -187,7 +190,7 @@
   <data name="4283880_2826" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\4283880_2826.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="4283880_2827" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\4283880_2827.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="moorhunh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\moorhuhn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

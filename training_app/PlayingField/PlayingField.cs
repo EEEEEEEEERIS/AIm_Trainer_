@@ -12,6 +12,8 @@ namespace Aim_Trainer
         private readonly RankingRepository _repository = new();
         private readonly GameSettings _settings = new();
 
+        private readonly Moorhuhn _moorhuhn = new();
+
         public PlayingField()
         {
             InitializeComponent();
@@ -23,6 +25,24 @@ namespace Aim_Trainer
 
             _gameState = new GameState(_settings, _startScreen, this, _repository);
             _gameState.AnimationTimer.Tick += AnimationTimer_Tick;
+
+            _gameState.targetFactory.MoorhuhnEvent += (s, e) => _moorhuhn.AnimateMoorhuhn();
+
+
+            _moorhuhn.MoorhuhnHit += (s, e) =>
+            {
+                if (_moorhuhn.chickenSize > 50)
+                {
+                    _gameState.Round.Points = _gameState.Round.Points + 6;
+                }
+                else
+                {
+                    _gameState.Round.Points = _gameState.Round.Points + 7;
+                }
+                _gameState.Round.Hits++;
+                _gameState.Round.Clicks++;
+                PointsCounter.Text = "Punkte: " + _gameState.Round.Points;
+            };
         }
 
         private void SetupBackgroundImagePlayingField()
@@ -58,6 +78,12 @@ namespace Aim_Trainer
             _startScreen.GameStart += async (s, e) => await _gameState.GameStart();
             _startScreen.ShowList += (s, e) => _repository.ShowList(_repository.BestUsers(), "Rangliste", true);
             _startScreen.ShowMenu += (s, e) => ShowMenu();
+
+
+            backgroundImagePlayingField.Controls.Add(_moorhuhn);   
+            _moorhuhn.Dock = DockStyle.Fill;
+            _moorhuhn.BringToFront();
+            _moorhuhn.Hide();
         }
 
         private async void Start_Button_Click(object sender, EventArgs e)
@@ -82,6 +108,7 @@ namespace Aim_Trainer
             _gameState.AnimationTimer.Start();
             _gameState.PointsAnimation.Draw(e.Graphics);
             _gameState.DrawCountdown(e.Graphics);
+
         }
 
         public void PlayingField_MouseClick(object? sender, MouseEventArgs e)
