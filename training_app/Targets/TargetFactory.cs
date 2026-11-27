@@ -12,7 +12,9 @@ namespace Aim_Trainer.Targets
         private const int UPPERLIMITOFTARGETS = 20;
         private readonly Random _random = new();
         public readonly List<AimTarget> targets = [];
-        private Size _playingFieldSize => _settings.PlayingFieldSize; 
+        private Size _playingFieldSize => _settings.PlayingFieldSize;
+        public event EventHandler? MoorhuhnEvent;
+
 
 
         public TargetFactory(GameSettings settings)
@@ -69,6 +71,11 @@ namespace Aim_Trainer.Targets
 
             if (_randomNumber.Next(100) < 50 && tragets.Count < UPPERLIMITOFTARGETS)
                 tragets.Add(NewTarget(false));
+
+            if (_randomNumber.Next(100) < 10)
+            {
+                MoorhuhnEvent?.Invoke(this, EventArgs.Empty);
+            } 
         }
 
         public void AddCircles()
